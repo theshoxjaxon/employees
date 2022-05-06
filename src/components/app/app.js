@@ -10,7 +10,7 @@ function App() {
   let data = [
     { name: "Shox", salary: 3700, increase: false, id: 1 },
     { name: "Sator", salary: 6900, increase: true, id: 2 },
-    { name: "Shawn", salary: 5100, increase: false, id: 3 },
+    { name: "Shawn", salary: 5100, increase: true, id: 3 },
   ];
   return (
     <div className="app">
