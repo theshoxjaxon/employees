@@ -8,7 +8,7 @@ import "./app.css";
 
 function App() {
   let data = [
-    { name: "Shox", salary: 3700, increase: false, id: 1 },
+    { name: "Shox", salary: 3700, increase: true, id: 1 },
     { name: "Sator", salary: 6900, increase: true, id: 2 },
     { name: "Shawn", salary: 5100, increase: true, id: 3 },
   ];
@@ -21,7 +21,7 @@ function App() {
         <AppFilter />
       </div>
 
-      <EmployeesList data={data} />
+      <EmployeesList data={data} onDelete={(id) => console.log(id)} />
       <EmployeesAddForm />
     </div>
   );
