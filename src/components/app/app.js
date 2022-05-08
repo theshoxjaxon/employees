@@ -19,15 +19,35 @@ class App extends Component {
         { name: "Shawn", salary: 5100, increase: true, id: 3 },
       ],
     };
+    this.maxId = 4;
   }
   deleteItem = (id) => {
     this.setState(({ data }) => {
+      // ! harder way for delete
       // const index = data.findIndex((elem) => elem.id === id);
       // const before = data.slice(0, index);
       // const after = data.slice(index + 1);
       // const newArr = [...before, ...after];
+      // return {
+      //   data: newArr
+      // }
+      // ! callback way for delete
       return {
         data: data.filter((item) => item.id !== id),
+      };
+    });
+  };
+  additem = (name, salary) => {
+    const newItem = {
+      name,
+      salary,
+      increase: false,
+      id: this.maxId++,
+    };
+    this.setState(({ data }) => {
+      const newArr = [...data, newItem];
+      return {
+        data: newArr,
       };
     });
   };
@@ -44,7 +64,7 @@ class App extends Component {
         </div>
 
         <EmployeesList data={data} onDelete={this.deleteItem} />
-        <EmployeesAddForm />
+        <EmployeesAddForm onAdd={this.additem} />
       </div>
     );
   }
