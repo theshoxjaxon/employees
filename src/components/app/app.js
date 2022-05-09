@@ -81,14 +81,25 @@ class App extends Component {
     }));
   };
   onToggleRise = (id) => {
-    console.log(`increase ${id}`);
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) {
+          return { ...item, like: !item.like };
+        }
+        return item;
+      }),
+    }));
   };
 
   render() {
+    const employees = this.state.data.length;
+    const increaseCheck = this.state.data.filter(
+      (item) => item.increase
+    ).length;
     const { data } = this.state;
     return (
       <div className="app">
-        <AppInfo />
+        <AppInfo employees={employees} increaseCheck={increaseCheck} />
 
         <div className="search-panel">
           <SearchPanel />
