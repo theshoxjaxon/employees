@@ -14,16 +14,16 @@ class App extends Component {
     super(prop);
     this.state = {
       data: [
-        { name: "Shox", salary: 3700, increase: true, id: 1 },
-        { name: "Sator", salary: 6900, increase: true, id: 2 },
-        { name: "Shawn", salary: 5100, increase: true, id: 3 },
+        { name: "Shox", salary: 3700, increase: false, like: true, id: 1 },
+        { name: "Sator", salary: 6900, increase: false, like: false, id: 2 },
+        { name: "Shawn", salary: 5100, increase: false, like: false, id: 3 },
       ],
     };
     this.maxId = 4;
   }
   deleteItem = (id) => {
     this.setState(({ data }) => {
-      // ! harder way for delete
+      // ! THE HARDEST WAY FOR DELETE PROPS
       // const index = data.findIndex((elem) => elem.id === id);
       // const before = data.slice(0, index);
       // const after = data.slice(index + 1);
@@ -31,7 +31,7 @@ class App extends Component {
       // return {
       //   data: newArr
       // }
-      // ! callback way for delete
+      // ! EASEE WAY FOR DELETE PROPS
       return {
         data: data.filter((item) => item.id !== id),
       };
@@ -42,6 +42,7 @@ class App extends Component {
       name,
       salary,
       increase: false,
+      like: false,
       id: this.maxId++,
     };
     this.setState(({ data }) => {
@@ -50,6 +51,37 @@ class App extends Component {
         data: newArr,
       };
     });
+  };
+
+  onToggleIncrease = (id) => {
+    // this.setState(({ data }) => {
+    // ! THE HARDEST WAY TO THE RISE CONDITION
+    // const index = data.findIndex((elem) => elem.id === id);
+    // const old = data[index];
+
+    // const newItem = { ...old, increase: !old.increase };
+    // const newArr = [
+    //   ...data.slice(0, index),
+    //   newItem,
+    //   ...data.slice(index + 1),
+    // ];
+    // return {
+    //   data: newArr,
+    // };
+
+    // });
+    // ! EASEE WAY TO THE RESI CONDITION
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) {
+          return { ...item, increase: !item.increase };
+        }
+        return item;
+      }),
+    }));
+  };
+  onToggleRise = (id) => {
+    console.log(`increase ${id}`);
   };
 
   render() {
@@ -63,7 +95,12 @@ class App extends Component {
           <AppFilter />
         </div>
 
-        <EmployeesList data={data} onDelete={this.deleteItem} />
+        <EmployeesList
+          data={data}
+          onDelete={this.deleteItem}
+          onToggleIncrease={this.onToggleIncrease}
+          onToggleRise={this.onToggleRise}
+        />
         <EmployeesAddForm onAdd={this.additem} />
       </div>
     );
