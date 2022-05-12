@@ -14,10 +14,11 @@ class App extends Component {
     super(prop);
     this.state = {
       data: [
-        { name: "Shox", salary: 3700, increase: false, like: true, id: 1 },
-        { name: "Sator", salary: 6900, increase: false, like: false, id: 2 },
-        { name: "Shawn", salary: 5100, increase: false, like: false, id: 3 },
+        { name: "Shox", salary: 3700, increase: false, like: false, id: 1 },
+        { name: "Alisher", salary: 6900, increase: false, like: false, id: 2 },
+        { name: "Sean", salary: 5100, increase: false, like: false, id: 3 },
       ],
+      term: "",
     };
     this.maxId = 4;
   }
@@ -90,24 +91,33 @@ class App extends Component {
       }),
     }));
   };
-
+  searchEmployees = (items, term) => {
+    if (term.length === 0) return items;
+    return items.filter((item) => {
+      return item.name.indexOf(term) > -1;
+    });
+  };
+  onUpdateSearch = (term) => {
+    this.setState({ term });
+  };
   render() {
+    const { data, term } = this.state;
     const employees = this.state.data.length;
     const increaseCheck = this.state.data.filter(
       (item) => item.increase
     ).length;
-    const { data } = this.state;
+    const visiblaData = this.searchEmployees(data, term);
     return (
       <div className="app">
         <AppInfo employees={employees} increaseCheck={increaseCheck} />
 
         <div className="search-panel">
-          <SearchPanel />
+          <SearchPanel onUpdateSearch={this.onUpdateSearch} />
           <AppFilter />
         </div>
 
         <EmployeesList
-          data={data}
+          data={visiblaData}
           onDelete={this.deleteItem}
           onToggleIncrease={this.onToggleIncrease}
           onToggleRise={this.onToggleRise}
