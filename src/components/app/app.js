@@ -1,5 +1,6 @@
 // ! IMPORTED cOMPONENT FROM REACT
 import { Component } from "react/cjs/react.production.min";
+
 // ! IMPORTED FROM MY COMPONENTS FOLDER
 import AppInfo from "../app-info/app-info";
 import SearchPanel from "../search-panel/search-panel";
