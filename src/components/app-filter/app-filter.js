@@ -9,6 +9,7 @@ const AppFilter = (props) => {
     {
       name: "rise",
       label: "For promotion",
+      check: true,
     },
     {
       name: "moreThen1000",
