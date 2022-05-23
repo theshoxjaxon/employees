@@ -1,4 +1,4 @@
-import { Component } from "react/cjs/react.production.min";
+
 import "./employees-list-item.css";
 
 const EmployeesListItem = (props) => {
